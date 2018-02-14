@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>searchGoogle</groupId>
+    <artifactId>searchGoogle</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+   <!--  <artifactId>maven.testng.report.dir</artifactId>
+    <groupId>testng</groupId>
+    <version>1.2</version>
+    -->
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <maven.testng.suitexml.name>/testng.xml</maven.testng.suitexml.name>
+        <maven.testng.suitexml.dir>${basedir}/test/conf</maven.testng.suitexml.dir>
+
+        <selenium.java.version>2.53.1</selenium.java.version>
+        <web.chrome.driver>src\\test\\resources\\drivers\\web\\chrome\\chromedriver.exe</web.chrome.driver>
+        <web.ie32.driver>src\\test\\resources\\drivers\\web\\ie\\3.0.0\\IEDriverServer32.exe</web.ie32.driver>
+        <web.ie64.driver>src\\test\\resources\\drivers\\web\\ie\\3.1.0\\IEDriverServer64.exe</web.ie64.driver>
+        <web.ff.driver>src\\test\\resources\\drivers\\web\\firefox\\geckodriver.exe</web.ff.driver>
+        <oracle.driver>src\\test\\resources\\drivers\\oracle\\jdbc-4.jar</oracle.driver>
+
+    </properties>
+
+    <build>
+        <!-- Source directory configuration -->
+        <sourceDirectory>src/test/java</sourceDirectory>
+        <plugins>
+            <!-- Following plugin executes the testng tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <systemProperties>
+                            <org.uncommons.reportng.title>"Selenium search in Google"</org.uncommons.reportng.title>
+                        </systemProperties>
+                    </systemPropertyVariables>
+
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter</value>
+                        </property>
+                    </properties>
+                    <reportsDirectory>${project.basedir}/reports</reportsDirectory>
+                    <!-- Suite testng xml file to consider for test execution -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+            <!-- Compiler plugin configures the java version to be usedfor compiling the code -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uncommons</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.4</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
+
+
+</project>
